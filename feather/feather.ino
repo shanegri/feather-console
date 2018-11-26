@@ -8,6 +8,8 @@ void setup() {
   Serial.println("Serial Monitor Connected");
 
   wifi_init();
+  game_init();
+
 }
 
 void loop() {
@@ -20,11 +22,9 @@ void loop() {
       break;
     case WIFI_SOCKETED:
 
-      //This is where game update code will be called
-      //Update data will be passed to wifi_push_data 
-      //causing the client to redraw the game
+      game_update();
 
-      wifi_push_data();
+      wifi_push_data(p1, p2, bx, by);
       break;
   }
 }

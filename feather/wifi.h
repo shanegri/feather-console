@@ -6,5 +6,5 @@ void wifi_init();
 
 void wifi_check_client();
 
-void wifi_push_data();
+void wifi_push_data(int p1, int p2, int bx, int by);
 
