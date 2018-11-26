@@ -30,7 +30,7 @@ data = ""
 for i in iter(response.read().splitlines()):
   data += " " + i.replace('"', r'\"')
 
-file_dest.write('#define CLIENT_JS "<script>'  + data + '</script>"')
+file_dest.write('#define CLIENT_JS "<script>' + data + '</script>"')
 file_dest.close()
 
 conn.close()
