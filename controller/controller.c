@@ -11,7 +11,6 @@
 #define RIGHT_DATA (1 << PB0)
 
 
-//xxxx x(left)(right)(shoot), 0 for no press, 1 for pressed
 volatile enum button_state {Pressed, Released} left_state, right_state;
 
 
@@ -48,32 +47,6 @@ void output_state(){
     }
     
 }
-<<<<<<< HEAD
-
-
-=======
-//not finished yet
-ISR(PCINT0_vect){
-    
-    if(PINB & LISTENER){
-        send_1;
-        _delay_ms(100);
-        clear();
-        _delay_ms(100);
-        send_1;
-        _delay_ms(100);
-        clear();
-        _delay_ms(100);
-        send_1;
-        _delay_ms(100);
-        clear();
-    }else{
-        
-    }
-    
-}
->>>>>>> 20e5f275d7d2e36fff775835c1358196690b0d58
-
 void main(){
     DDRB |= LEFT_DATA | RIGHT_DATA;
     PORTB = 0;
