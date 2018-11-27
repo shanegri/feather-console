@@ -8,38 +8,51 @@ int p2 = 25;
 int bx = 10;
 int by = 10;
 
-bool p1Up;
-bool p2Up;
-bool p1Down;
-bool p2Down;
 
-//not going to use dis
-enum BTN_STATE {PRESSED = 0, RELEASED };
 
-volatile BTN_STATE ctr1_btn1 = RELEASED;
-volatile BTN_STATE ctr11_btn2 = RELEASED;
-volatile BTN_STATE ctr12_btn1 = RELEASED;
-volatile BTN_STATE ctrl2_btn2 = RELEASED;
+int velocity_x = 65536; // (1 << 16)
+int velocity_y = 65536;
 
-const int movement_const = 1;
+int real_bx = bx * (1 << 16);
+int real_by = by * (1 << 16);
+
+uint8_t button_status = 0;
+//xxxx (p1Up)(p2Up)(p1Down)(p2Down)
+
+
 void update_movement(){
-  if(p1Up){
-    p1 = p1 - movement_const;
+  if(button_status & (1 << 3){
+    p1 = p1 - 1;
   }
-  if(p1Down){
-    p1 = p1 +movement_const;
+  if(button_status & (1 << 1)){
+    p1 = p1 +1;
   }
-  if(p2Up){
-    p2 = p2-movement_const;
+  if(button_status & (1 << 2){
+    p2 = p2-1;
   }
-  if(p2Down){
-    p2 = p2 + movement_const;
+  if(button_status & 1){
+    p2 = p2 +1;
   }
 }
 
+
+void update_ball_position(){
+  real_bx = real_bx +velocity_x;
+  real_by = real_by + velocity_y;
+  bx = real_bx >> 16;
+  by = real_by >> 16;
+  
+}
+
+void update_ball_velocity(){
+  if(by < 0 || by >30){
+    velocity_y = - velocity_y;
+  }
+  
+}
 void game_init() {
   p1 = 0;
-  p2 = 2;
+  p2 = 0;
 }
 
 void game_update() {

@@ -8,16 +8,33 @@
 
 
 void p1UpInt(){
-  p1Up = digitalRead(LEFT_P1_PIN)? true:false;
+  if(digitalRead(LEFT_P1_PIN)){
+    button_status |= (1 << 3);
+  }else{
+    button_status &= ~(1 << 3); 
+  }
+  
 }
 void p1DownInt(){
-  p1Down = digitalRead(RIGHT_P1_PIN)? true:false;
+  if(digitalRead(RIGHT_P1_PIN)){
+    button_status |= (1 << 1);
+  }else{
+    button_status &= ~(1 << 1); 
+  }
 }
 void p2UpInt(){
-  p2Up = digitalRead(LEFT_P2_PIN)? true:false;
+  if(digitalRead(LEFT_P2_PIN)){
+    button_status |= (1 << 2);
+  }else{
+    button_status &= ~(1 << 2); 
+  }
 }
 void p2DownInt(){
-  p2Down = digitalRead(RIGHT_P2_PIN)? true:false;
+  if(digitalRead(RIGHT_P2_PIN)){
+    button_status |= (1 << 0);
+  }else{
+    button_status &= ~(1 << 0); 
+  }
 }
 void setup() {
   Serial.begin(9600);
