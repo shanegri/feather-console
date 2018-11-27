@@ -1,5 +1,6 @@
 #include "game.h"
 #include "constants.h"
+#include <stdint.h>
 
 //All game code goes here
 
@@ -17,17 +18,18 @@ int real_bx = bx * (1 << 16);
 int real_by = by * (1 << 16);
 
 uint8_t button_status = 0;
+//would like an byte
 //xxxx (p1Up)(p2Up)(p1Down)(p2Down)
 
 
 void update_movement(){
-  if(button_status & (1 << 3){
+  if(button_status & (1 << 3)){
     p1 = p1 - 1;
   }
   if(button_status & (1 << 1)){
     p1 = p1 +1;
   }
-  if(button_status & (1 << 2){
+  if(button_status & (1 << 2)){
     p2 = p2-1;
   }
   if(button_status & 1){
