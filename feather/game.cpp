@@ -41,7 +41,9 @@ void update_movement(){
     p2 = p2 +1;
   }
 }
-
+void run_deflection(bool is_player1){
+  velocity_flag ^= 2;
+}
 int tempx;
 void update_ball_position(){
   switch(velocity_flag){
@@ -76,9 +78,7 @@ void update_ball_position(){
   }
   
 }
-void run_deflection(bool is_player1){
-  velocity_flag ^= 2;
-}
+
 void update_ball_velocity(){
   if(by < 0 || by >30){
     velocity_flag ^= 1;
