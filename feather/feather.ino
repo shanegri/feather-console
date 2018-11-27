@@ -65,7 +65,7 @@ void loop() {
 
       game_update();
 
-      wifi_push_data(p1, p2, bx, by);
+      wifi_push_data(p1, p2, bx, by,0,0);
       break;
   }
 }

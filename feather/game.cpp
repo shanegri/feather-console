@@ -26,6 +26,7 @@ uint8_t button_status = 0;
 //would like an byte
 //xxxx (p1Up)(p2Up)(p1Down)(p2Down)
 
+enum game_states {Initialize,P1_Throw, P2_Throw, Action } state;
 
 void update_movement(){
   if((button_status & (1 << 3)) && p1 >= 0){
@@ -41,6 +42,7 @@ void update_movement(){
     p2 = p2 +1;
   }
 }
+
 void run_deflection(bool is_player1){
   velocity_flag ^= 2;
 }
@@ -89,12 +91,20 @@ void update_ball_velocity(){
   
 }
 void game_init() {
+  state = P1_Throw;
   p1 = 15;
   p2 = 15;
    
 }
 
 void game_update() {
+  switch(state){
+    case Initialize:
+      game_init();
+      break;
+    case P1_Throw:
+      
+  }
     update_movement();
     update_ball_velocity();
     update_ball_position();
