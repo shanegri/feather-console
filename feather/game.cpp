@@ -89,7 +89,7 @@ void update_ball_position(){
     bx = real_bx >> 16;
     return;
   }
-  if(tempx >= B_WIDTH - P_OFFSET && bx <= B_WIDTH - P_OFFSET && by>= p2 && by <= p2+P_HEIGHT ){
+  if(tempx <= B_WIDTH - P_OFFSET && bx >= B_WIDTH - P_OFFSET && by>= p2 && by <= p2+P_HEIGHT ){
     velocity_flag ^= 2;
     bx = tempx;
     bx = real_bx >> 16;
