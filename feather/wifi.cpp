@@ -41,7 +41,7 @@ void wifi_init() {
 WiFiClient client_connected;
 
 //Push data to the client event stream
-void wifi_push_data(int p1, int p2, int bx, int by) {
+void wifi_push_data(int p1, int p2, int bx, int by, int score) {
     if( client_connected && client_connected.connected() ) {
         client_connected.print("data: [");
         client_connected.print(p1);
@@ -51,6 +51,8 @@ void wifi_push_data(int p1, int p2, int bx, int by) {
         client_connected.print(bx);   
         client_connected.print(",");     
         client_connected.print(by);
+        client_connected.print(",");     
+        client_connected.print(score);
         client_connected.println("]");
         client_connected.println();
         client_connected.flush();    
