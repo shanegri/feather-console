@@ -54,7 +54,7 @@ void update_movement(){
   if((button_status & (1 << 2)) && p2 >= 0){
     p2 = p2-1;
   }
-  if((button_status & 1) && p2 < P_HEIGHT - P_OFFSET){
+  if((button_status & 1) && p2 < B_HEIGHT - P_HEIGHT){
     p2 = p2 +1;
   }
 }
@@ -104,10 +104,12 @@ void update_ball_velocity(){
   }
   if(bx < 0){
     score2 += 1;
+    set_position_ball(true);
     state = P1_Throw;
   }
   if(bx > B_WIDTH){
     score1 +=1;
+    set_position_ball(false);
     state - P2_Throw;
   }
   
