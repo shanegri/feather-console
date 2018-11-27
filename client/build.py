@@ -14,7 +14,7 @@ file_src.close()
 
 params = urllib.urlencode([
     ('js_code', js_code), 
-    ('compilation_level', 'SIMPLE_OPTIMIZATIONS'),
+    ('compilation_level', 'ADVANCED_OPTIMIZATIONS'),
     ('output_format', 'text'),
     ('output_info', 'compiled_code'),
   ])

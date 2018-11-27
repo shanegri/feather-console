@@ -58,12 +58,14 @@ void loop() {
     case WIFI_WAIT:
       
       //Waiting for a client to connect
-
+      game_init();
       wifi_check_client();
       break;
     case WIFI_SOCKETED:
 
       game_update();
+
+      delay(10);
 
       wifi_push_data(p1, p2, bx, by);
       break;

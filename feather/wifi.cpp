@@ -3,6 +3,7 @@
 #include <WiFi101.h>
 #include "client.h"
 #include "constants.h"
+#include <stdint.h>
 
 /*
 Connecting to wifi:
@@ -13,7 +14,7 @@ Connecting to wifi:
 
 WIFI_STATE wifi_state = WIFI_WAIT;
 
-int wifi_status = WL_IDLE_STATUS;
+volatile uint8_t wifi_status = WL_IDLE_STATUS;
 
 WiFiServer server(80);
 

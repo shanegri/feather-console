@@ -4,12 +4,10 @@
 
 //All game code goes here
 
-int p1 = 0;
-int p2 = 25;
-int bx = 10;
-int by = 10;
-
-
+uint8_t p1 = 0;
+uint8_t p2 = 25;
+uint8_t bx = 10;
+uint8_t by = 10;
 
 int velocity_x = 65536; // (1 << 16)
 int velocity_y = 65536;
