@@ -38,7 +38,7 @@ void update_movement(){
   if((button_status & (1 << 2)) && p2 >= 0){
     p2 = p2-1;
   }
-  if((button_status & 1) && p2 < P_HEIGHT - P_OFFSET){
+  if((button_status & 1) && p2 < B_HEIGHT - P_OFFSET){
     p2 = p2 +1;
   }
 }
