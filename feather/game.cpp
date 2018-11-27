@@ -103,7 +103,7 @@ void game_update() {
       game_init();
       break;
     case P1_Throw:
-      
+      break;
   }
     update_movement();
     update_ball_velocity();
