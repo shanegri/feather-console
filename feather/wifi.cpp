@@ -172,7 +172,6 @@ String waitForClientData(WiFiClient client) {
 			readPage = true;	
 		}
 
-		Serial.write(c);
 
 		if (c == '\n' && prevLineBlank) {
 			return page;
@@ -199,20 +198,18 @@ void wifi_check_client() {
 
 	String page = waitForClientData(client);
 
-	Serial.println("New client connected for page: " + page);
 
 	if(page == "socket") {
         serverSentEventHeader(client);
         wifi_state = WIFI_SOCKETED;
         client_connected = client;
         return;
-	} else if ( page == "game") {
+	} else if ( page == "") {
 		sendClientGame(client);
 	} else {
 		sendClientError(client);
 	}
     
     client.stop();
-    Serial.println("Client disconnected");
   }
 }

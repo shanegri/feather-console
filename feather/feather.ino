@@ -37,10 +37,6 @@ void p2DownInt(){
   }
 }
 void setup() {
-  // Serial.begin(9600);
-  // while(!Serial);
-
-  Serial.println("Serial Monitor Connected");
   
   attachInterrupt(digitalPinToInterrupt(LEFT_P1_PIN), p1UpInt, CHANGE);
   attachInterrupt(digitalPinToInterrupt(RIGHT_P1_PIN), p1DownInt, CHANGE);
