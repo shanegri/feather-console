@@ -6,8 +6,9 @@
 #define LEFT_P2_PIN 11
 #define RIGHT_P2_PIN 10
 
-
+//The pin change interrupt function for the following pins
 void p1UpInt(){
+  //flips the bit in button status
   if(digitalRead(LEFT_P1_PIN)){
     button_status |= (1 << 3);
   }else{
@@ -15,6 +16,7 @@ void p1UpInt(){
   }
   
 }
+//same pattern as before
 void p1DownInt(){
   if(digitalRead(RIGHT_P1_PIN)){
     button_status |= (1 << 1);
@@ -37,7 +39,7 @@ void p2DownInt(){
   }
 }
 void setup() {
-  
+  //this attaches the interrupts with the pins
   attachInterrupt(digitalPinToInterrupt(LEFT_P1_PIN), p1UpInt, CHANGE);
   attachInterrupt(digitalPinToInterrupt(RIGHT_P1_PIN), p1DownInt, CHANGE);
   attachInterrupt(digitalPinToInterrupt(LEFT_P2_PIN), p2UpInt, CHANGE);
