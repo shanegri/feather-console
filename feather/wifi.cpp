@@ -4,6 +4,7 @@
 #include "client.h"
 #include "constants.h"
 #include <stdint.h>
+#include <LiquidCrystal.h>
 
 /*
 Connecting to wifi:
@@ -11,6 +12,8 @@ Connecting to wifi:
     #define SECRET_SSID "WIFI NAME"
     #define SECRET_PASS "WIFI PASS"
 */
+LiquidCrystal lcd(A0, A1, A2, A3, A4, A5);
+
 
 WIFI_STATE wifi_state = WIFI_WAIT;
 
@@ -18,24 +21,54 @@ volatile uint8_t wifi_status = WL_IDLE_STATUS;
 
 WiFiServer server(80);
 
+void lcdPrintIP() {
+    IPAddress ip = WiFi.localIP();
+    
+    lcd.setCursor(0,0);
+    lcd.clear();
+
+    lcd.write(SECRET_SSID);
+
+    String localIP = String(ip[0]) + "." +String(ip[1]) + "." + String(ip[2]) + "." + String(ip[3]);
+
+    lcd.setCursor(0,1);
+    lcd.write(localIP.c_str());
+}
+
+
 void wifi_init() {
     WiFi.setPins(8,7,4,2);
 
+    lcd.begin(16, 2);
+    lcd.setCursor(0,0);
+
+
     //Attempt to connect to WiFi
     while( wifi_status != WL_CONNECTED ) {
-        Serial.print("Attepting to connected to: ");
-        Serial.println(SECRET_SSID);
+        lcd.setCursor(0,0);
+        lcd.write("Connecting.  ");
+        lcd.setCursor(0,1);
+        lcd.write(SECRET_SSID);
         wifi_status = WiFi.begin(SECRET_SSID, SECRET_PASS);
-        delay(1000);
+        delay(200);
+        lcd.setCursor(0,0);
+        lcd.write("Connecting.. ");
+        delay(200);
+        lcd.setCursor(0,0);
+        lcd.write("Connecting...");
+        delay(200);
+        lcd.setCursor(0,0);
+        lcd.write("Connecting.. ");
+        delay(200);
     }
 
-    Serial.println("WiFi Connected");
-    IPAddress ip = WiFi.localIP();
-    Serial.print("IP Address: ");
-    Serial.println(ip);
+    lcdPrintIP();
+
 
     server.begin();
 }
+
+
 
 
 WiFiClient client_connected;
@@ -62,12 +95,16 @@ void wifi_push_data(int p1, int p2, int bx, int by, int p1Score, int p2Score) {
     }
     
     //Client has disconnected
+    lcdPrintIP();
     if( client_connected ) client_connected.stop();
     wifi_state = WIFI_WAIT;
 }
 
 
 void serverSentEventHeader(WiFiClient client) {
+    lcd.setCursor(0,0);
+    lcd.clear();
+    lcd.write("Game In Progress..");
     client.println("HTTP/1.1 200 OK");
     client.println("Content-Type: text/event-stream;charset=UTF-8");
     client.println("Connection: close");  

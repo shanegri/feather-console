@@ -37,8 +37,8 @@ void p2DownInt(){
   }
 }
 void setup() {
-  Serial.begin(9600);
-  while(!Serial);
+  // Serial.begin(9600);
+  // while(!Serial);
 
   Serial.println("Serial Monitor Connected");
   
@@ -64,6 +64,8 @@ void loop() {
     case WIFI_SOCKETED:
 
       game_update();
+
+      delay(10);
 
       wifi_push_data(p1, p2, bx, by,score1,score2);
       break;

@@ -11,10 +11,10 @@ int by = 10;
 int score1 = 0;
 int score2 = 0;
 
-int pos_velocity_x = 32768; // (1 << 15)
-int pos_velocity_y = 32768;
-int neg_velocity_x = 32768; // (1 << 15)
-int neg_velocity_y = 32768;// subtract negative velocities
+int pos_velocity_x = 1<<15; // (1 << 15)
+int pos_velocity_y = 1<<15;
+int neg_velocity_x = 1<<15; // (1 << 15)
+int neg_velocity_y = 1<<15;// subtract negative velocities
 
 uint8_t velocity_flag = 3; //(xxxx xx(x)(y)
 //0 is neg x, neg y
