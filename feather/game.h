@@ -1,4 +1,6 @@
 #include <stdint.h>
+
+//Vars that are pushed to the display
 extern int p1;
 extern int p2;
 extern int bx;

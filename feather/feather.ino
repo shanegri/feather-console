@@ -53,18 +53,26 @@ void setup() {
 
 void loop() {
   switch (wifi_state) {
+    //Waiting for a client to connect
     case WIFI_WAIT:
       
-      //Waiting for a client to connect
+      //Game is perpetually reset to inital state if no client
       game_init();
+      
+      //Check if new client is connected and handle appropriately   
       wifi_check_client();
       break;
+    
+    //Client has connected and ready to recieve game updates
     case WIFI_SOCKETED:
 
+      //Update to next game frame
       game_update();
 
+      //Give client time to receive previous data
       delay(10);
 
+      //Push game updates to stream
       wifi_push_data(p1, p2, bx, by,score1,score2);
       break;
   }
