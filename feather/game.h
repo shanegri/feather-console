@@ -8,6 +8,8 @@ extern int score2;
 
 extern uint8_t button_status;
 
+//Reset game 
 void game_init();
 
+//Update to next game frame
 void game_update();

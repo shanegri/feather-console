@@ -12,6 +12,8 @@ Connecting to wifi:
     #define SECRET_SSID "WIFI NAME"
     #define SECRET_PASS "WIFI PASS"
 */
+
+
 LiquidCrystal lcd(A0, A1, A2, A3, A4, A5);
 
 
@@ -21,6 +23,7 @@ volatile uint8_t wifi_status = WL_IDLE_STATUS;
 
 WiFiServer server(80);
 
+//Print the local IP address to the LCD display
 void lcdPrintIP() {
     IPAddress ip = WiFi.localIP();
     
@@ -69,11 +72,10 @@ void wifi_init() {
 }
 
 
-
-
+//Store currently connected client
 WiFiClient client_connected;
 
-//Push data to the client event stream
+//Push new data to the client event stream
 void wifi_push_data(int p1, int p2, int bx, int by, int p1Score, int p2Score) {
     if( client_connected && client_connected.connected() ) {
         client_connected.print("data: [");
@@ -100,7 +102,7 @@ void wifi_push_data(int p1, int p2, int bx, int by, int p1Score, int p2Score) {
     wifi_state = WIFI_WAIT;
 }
 
-
+//Client wants event feed, send server-sent event header
 void serverSentEventHeader(WiFiClient client) {
     lcd.setCursor(0,0);
     lcd.clear();
@@ -108,16 +110,13 @@ void serverSentEventHeader(WiFiClient client) {
     client.println("HTTP/1.1 200 OK");
     client.println("Content-Type: text/event-stream;charset=UTF-8");
     client.println("Connection: close");  
-    
-    //Remove this line when files are served from feather
     client.println("Access-Control-Allow-Origin: *");  
-    
     client.println("Cache-Control: no-cache");  
     client.println();
     client.flush();
 }
 
-//Game Url
+//Game Url, send client game HTML and JS
 void sendClientGame(WiFiClient client) {
 	client.println("HTTP/1.1 200 OK");
     client.println("Content-Type: text/html");
