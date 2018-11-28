@@ -13,7 +13,8 @@
 
 volatile enum button_state {Pressed, Released} left_state, right_state;
 
-
+//the following functions sets the output accordingly, used to communicate to the feather
+//about what button is being pressed
 void turn_left_on(){
     DDRB = DDRB | LEFT_DATA;
     PORTB = PORTB | LEFT_DATA;
@@ -32,7 +33,7 @@ void turn_right_off(){
     PORTB &= ~RIGHT_DATA;
 }
 
-
+//sets the outputs accordingly
 void output_state(){
     
     if(left_state == Pressed){
@@ -47,19 +48,23 @@ void output_state(){
     }
     
 }
+
 void main(){
+    //initializing the inputs
     DDRB |= LEFT_DATA | RIGHT_DATA;
     PORTB = 0;
     uint8_t history_l =0;
     uint8_t history_r =0;
     uint8_t pin_read = 0;
     
+    //main loop
     while(1){
         //read button states
         history_l = history_l << 1;
         history_r = history_r << 1;
         
         pin_read = PINB;
+        //debounce logic
         if(pin_read & BUTTON_LEFT){
             history_l |=0x01;
         }
